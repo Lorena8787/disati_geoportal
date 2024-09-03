@@ -1,0 +1,130 @@
+<mat-drawer #drawer class="sidenav" mode="over" position="end" [opened]="drawerOpened"> 
+
+    <div class="sidenav-header property-details">
+        <h3 *ngIf="selectedProperties && !selectedProperties.nombre_division" class="title">
+            <mat-icon class="icon_ind4">location_on</mat-icon> {{ selectedProperties.pais }}
+            <div class="close-button">
+                <button matTooltip="Cerrar" matTooltipPosition="left" mat-icon-button (click)="closePanel()">
+                  <mat-icon class="icon">close</mat-icon>
+                </button>
+            </div>
+        </h3>
+        <h3 *ngIf="selectedProperties && selectedProperties.nombre_division" class="title">
+            <mat-icon class="icon_ind4">location_on</mat-icon> {{ selectedProperties.nombre }} - {{ selectedProperties.pais }}
+            <div class="close-button">
+                <button matTooltip="Cerrar" matTooltipPosition="left" mat-icon-button (click)="closePanel()">
+                  <mat-icon class="icon">close</mat-icon>
+                </button>
+            </div>
+        </h3>
+    </div>
+
+    <div class="sidenav-content">
+        <mat-tab-group class="mat-tab-group">
+            <mat-tab label="Detalles Generales">
+                <div class="tab-content">
+                    <div *ngIf="selectedProperties" class="data-div">
+                        <p class="element" *ngIf="selectedProperties.nombre_division && selectedProperties.nombre">
+                            <mat-icon class="icon_ind3">check</mat-icon>
+                            <strong>{{ capitalizeFirstLetter(selectedProperties.nombre_division) }}: </strong> &nbsp; {{
+                            selectedProperties.nombre }}
+                        </p>
+                        <p class="element" *ngIf="selectedProperties.miembro_appat === 'True'">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Miembro APPAT: </strong> &nbsp;Sí
+                        </p>
+                        <p class="element" *ngIf="selectedProperties.miembro_appat === 'False'">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Miembro APPAT: </strong> &nbsp;No
+                        </p>
+
+                        <p class="element" *ngIf="selectedProperties.miembro_cpci === 'True'">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Miembro CPCI: </strong> &nbsp;Sí
+                        </p>
+                        <p class="element" *ngIf="selectedProperties.miembro_cpci === 'False'">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Miembro CPCI: </strong> &nbsp;No
+                        </p>
+                        <p class="element" *ngIf="selectedProperties.url">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Web: </strong> &nbsp;
+                            <a [href]="selectedProperties.url" target="_blank"> {{ selectedProperties.url }}</a>
+                        </p>
+                    </div>
+                    <div *ngIf="formattedData && formattedData.length > 0">
+                        <div *ngFor="let ordenData of formattedData" class="data-div">
+                            <h3 class="title2">{{ ordenData.enunciado }}:</h3>
+                            <ul class="lista">
+                                <div *ngFor="let entidad of ordenData.entidades">
+                                    <li *ngIf="entidad.respuestas.join(', ') != ''" class="element2">{{ entidad.entidad }}: <strong>{{ entidad.respuestas.join(', ')}}</strong> </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Miembros APPAT" *ngIf="aditionalData && aditionalData.appat_miembros.length != 0">
+                <div class="tab-content">
+                    <div *ngFor="let miembro of aditionalData.appat_miembros" class="data-div">
+                        <h3 *ngIf="miembro.institucion" class="title2"> {{ miembro.institucion }} </h3>
+                        <p class="element" *ngIf="miembro.funciona === true">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Funciona: </strong> &nbsp;Sí
+                        </p>
+                        <p class="element" *ngIf="miembro.funciona === false">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Funciona: </strong> &nbsp;No
+                        </p>
+                        <p class="element" *ngIf="miembro.idioma">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Idioma: </strong> &nbsp;{{
+                            miembro.idioma }}
+                        </p>
+                        <p class="element" *ngIf="miembro.web">
+                            <mat-icon class="icon_ind3">check</mat-icon><strong>Web: </strong> &nbsp;
+                            <a [href]="miembro.web" target="_blank"> {{ miembro.web }}</a>
+                        </p>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Miembros CPCI" *ngIf="aditionalData && aditionalData.cpci_miembros.length != 0">
+                <div *ngFor="let miembro of aditionalData.cpci_miembros" class="data-div">
+                    <h3 *ngIf="miembro.institucion" class="title2"> {{ miembro.institucion }} </h3>
+                    <p class="element" *ngIf="miembro.funciona === true">
+                        <mat-icon class="icon_ind3">check</mat-icon><strong>Funciona: </strong> &nbsp;Sí
+                    </p>
+                    <p class="element" *ngIf="miembro.funciona === false">
+                        <mat-icon class="icon_ind3">check</mat-icon><strong>Funciona: </strong> &nbsp;No
+                    </p>
+                    <p class="element" *ngIf="miembro.idioma">
+                        <mat-icon class="icon_ind3">check</mat-icon><strong>Idioma: </strong> &nbsp; {{
+                        miembro.idioma }}
+                    </p>
+                    <p class="element" *ngIf="miembro.web">
+                        <mat-icon class="icon_ind3">check</mat-icon><strong>Web: </strong> &nbsp;
+                        <a [href]="miembro.web" target="_blank"> {{ miembro.web }}</a>
+                    </p>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Miembros CPCI Observadores"
+                *ngIf="aditionalData && aditionalData.cpci_observadores.length != 0">
+                <div *ngFor="let miembro of aditionalData.cpci_observadores" class="data-div">
+                    <h3 *ngIf="miembro.institucion" class="title2"> {{ miembro.institucion }} </h3>
+                    <p class="element" *ngIf="miembro.funciona === true">
+                        <mat-icon class="icon_ind3">check</mat-icon><strong>Funciona: </strong> &nbsp;Sí
+                    </p>
+                    <p class="element" *ngIf="miembro.funciona === false">
+                        <mat-icon class="icon_ind3">check</mat-icon><strong>Funciona: </strong> &nbsp;No
+                    </p>
+                    <p class="element" *ngIf="miembro.idioma">
+                        <mat-icon class="icon_ind3">check</mat-icon><strong>Idioma: </strong> &nbsp; {{
+                        miembro.idioma }}
+                    </p>
+                    <p class="element" *ngIf="miembro.web">
+                        <mat-icon class="icon_ind3">check</mat-icon><strong>Web: </strong> &nbsp;
+                        <a [href]="miembro.web" target="_blank"> {{ miembro.web }}</a>
+                    </p>
+                </div>
+            </mat-tab>
+    
+        </mat-tab-group>
+    
+    </div>
+
+</mat-drawer>

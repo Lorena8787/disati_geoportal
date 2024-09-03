@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  --primary-color: #cf7410;
+  --secondary-color: #e9c383;
+  //--accent-color: #e74c3c;
+  //--background-color: #ecf0f1;
+  --text-color: #cf7410;
+
+  --mdc-circular-progress-active-indicator-color: var(--secondary-color); // para cambiar el color del spinner circular
+  --mat-sidenav-scrim-color: transparent; // para que no oscurezca el div de content
+
+
+  --mdc-linear-progress-active-indicator-color: var(--secondary-color); // cambiar el color del spinner lineal
+  --mdc-linear-progress-track-color: rgba(242, 181, 137, 0.39); // cambiar el color del spinner lineal
+
+  --mdc-tab-indicator-active-indicator-color: white;
+  --mat-tab-header-active-label-text-color: rgb(175, 64, 0);
+  --mat-tab-header-inactive-label-text-color: white;
+
+  .mat-drawer-inner-container {
+    overflow: hidden !important;
+  }
+}
