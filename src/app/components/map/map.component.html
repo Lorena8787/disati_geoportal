@@ -1,0 +1,17 @@
+<mat-drawer-container class="container">
+
+  <!-- Elementos del mapa -->
+  <div id="map"></div>
+  <div class="datum"> Datum: WGS 84 / Pseudo-Mercator </div>
+  <div class="coordinates"> {{ cursorCoordinates }} </div>
+
+  <!-- Panel derecho -->
+  <app-right-panel *ngIf="drawerOpened" [drawerOpened]="drawerOpened" [selectedProperties]="selectedProperties"
+  [formattedData]="formattedData" [aditionalData]="aditionalData" (drawerClosed)="onDrawerClosed()"></app-right-panel>
+
+  <!-- Menú flotante con botones -->
+  <div>
+    <app-floating-menu></app-floating-menu>
+  </div>
+  
+</mat-drawer-container>

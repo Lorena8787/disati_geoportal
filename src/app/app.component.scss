@@ -1,0 +1,7 @@
+// Contenedor 
+.container {
+    height: calc(100% - var(--mat-toolbar-standard-height) - 25px);
+    background-color: rgb(240, 240, 240);
+    width: calc(100% - 60px);
+    left: 60px;
+}

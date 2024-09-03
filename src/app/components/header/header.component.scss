@@ -1,0 +1,25 @@
+.header-content {
+    display: flex;
+    align-items: center; 
+    height: 59px;
+    gap: 20px; 
+    border-bottom: 0.5px solid rgb(175, 64, 0);
+    background: var(--primary-color);
+    overflow: hidden;
+    padding-left: 10px;
+
+    & p {
+        width: 400px;
+        margin: 0; 
+        color: white;
+        font-size: medium;
+        white-space: normal;
+        line-height: 1.2;
+    }
+}
+
+.logo-right-img {
+    max-height: 50px;
+    height: auto;
+    width: auto;
+}

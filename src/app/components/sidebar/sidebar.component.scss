@@ -1,0 +1,45 @@
+mat-sidenav {
+    width: 60px;
+    color: var(--primary-color);
+    background-color: var(--primary-color);
+    border-right: 1px solid rgb(175, 64, 0);
+
+    // Marquito
+    left: 10px;
+    top: 10px;
+    height: calc(100% - 20px);
+    border-left: 3px solid rgb(175, 64, 0);
+    border-top: 3px solid rgb(175, 64, 0);
+    border-bottom: 3px solid rgb(175, 64, 0);
+}
+
+mat-nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+mat-icon.icon {
+    color: rgba(255, 255, 255, 0.5); 
+    transition: color 0.3s; 
+}
+
+/* Cambia el color del icono activo */
+mat-sidenav .active-link mat-icon.icon {
+    color: rgba(255, 255, 255, 1); 
+}
+
+/* Estilos generales para el botón */
+mat-icon.icon {
+    color: rgba(255, 255, 255, 0.5); 
+    transition: color 0.3s; 
+}
+
+/* Cambia el color del icono activo */
+mat-sidenav .active mat-icon.icon {
+    color: rgba(255, 255, 255, 1); 
+}
+
+button {
+    margin: 10px 0;
+}

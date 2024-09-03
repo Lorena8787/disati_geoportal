@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content styles */
+.main-content {
+    padding: 20px 0 0 0;
+    flex: 1;
+    background-color: rgb(240, 240, 240);
+}
+
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.features {
+    margin-bottom: 40px;
+
+    & h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+}
+
+.feature {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+
+    & h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    & p {
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: justify;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.column {
+    flex: 1;
+    padding: 20px;
+
+    background-color: white;
+    border-left: 5px solid var(--secondary-color);
+    border-radius: 5px;
+    margin: 15px;
+
+    & h2, h3 {
+        color: var(--primary-color);
+    }
+}
+
+.cta {
+    text-align: center;
+    border-radius: 5px;
+    width: 100%;
+
+    & h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: var(--primary-color)
+    }
+
+    & p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    & .btn {
+        display: inline-block;
+        cursor: pointer;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        transition: background-color 0.3s;
+    }
+
+    & .btn:hover {
+        background-color: var(--primary-color);
+    }
+}
+
+.logo-img {
+    max-height: 100px;
+    height: auto;
+    width: auto;
+}
+
+.logo-img2 {
+    max-height: 100px;
+    height: auto;
+    width: auto;
+    border-radius: 5%;
+}
+
+.column2 {
+    display: flex;
+    gap: 10%;
+    flex-direction: row;
+    justify-content: center;
+}

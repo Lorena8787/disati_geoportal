@@ -1,0 +1,142 @@
+<div class="left-panel">
+  <ng-container [ngSwitch]="activeContent">
+    <div class="main-div" *ngSwitchCase="'layers'">
+      <div class="header">
+        <div class="title-div">
+          <span class="title"><mat-icon class="icon_ind2">layers</mat-icon>Lista de Capas
+            <div class="close-button">
+              <button matTooltip="Cerrar" matTooltipPosition="left" mat-icon-button (click)="closePanel()">
+                <mat-icon class="icon">close</mat-icon>
+              </button>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="content" id="layer-list">
+        <ul id="layer"></ul>
+        <ul id="layer2" style="list-style: none; padding: 0; margin: 0;">
+          <!-- Lista de capas agrupadas -->
+          <div class="layer-group">
+            <div class="layer-group-title" style="display: flex; align-items: center; padding-top: 10px;">
+              <!-- Checkbox para mostrar/ocultar todas las capas del grupo -->
+              <input type="checkbox" [checked]="isGroupVisible('catastroBogota')"(change)="toggleGroupVisibility($event, 'catastroBogota')"
+                style="margin-right: 10px; width: 16px; height: 18px;">
+              <!-- Título del grupo -->
+              <span>Catastro Bogotá</span>
+              <!-- Botón de zoom -->
+              <button mat-icon-button matTooltip="Acercar" matTooltipPosition="right" (click)="zoomToGroup('catastroBogota')">
+                <mat-icon>zoom_in_map</mat-icon>
+              </button>
+            </div>
+            <!-- Lista de capas en el grupo -->
+            <ul *ngFor="let layer of wmsLayers" style='list-style-type: none;  padding: 0; margin: 0;'>
+              <li *ngIf="layer.name=='catastroBogota'"
+                style='list-style-type: none;  padding-left: 25px; margin: 0; padding-top: 5px;'>
+                <input type="checkbox" [checked]="isLayerVisible(layer)" (change)="toggleLayerVisibility(layer)"
+                  style="margin-right: 10px; width: 14px; height: 16px;">{{ layer.label }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="layer-group">
+            <div class="layer-group-title" style="display: flex; align-items: center; padding-top: 10px;">
+              <!-- Checkbox para mostrar/ocultar todas las capas del grupo -->
+              <input type="checkbox" [checked]="isGroupVisible('catastroEspaña')"
+                (change)="toggleGroupVisibility($event, 'catastroEspaña')"
+                style="margin-right: 10px; width: 16px; height: 18px;">
+
+
+              <!-- Título del grupo -->
+              <span>Catastro España</span>
+
+              <!-- Botón de zoom -->
+              <button mat-icon-button matTooltip="Acercar" matTooltipPosition="right"
+                (click)="zoomToGroup('catastroEspaña')">
+                <mat-icon>zoom_in_map</mat-icon>
+              </button>
+            </div>
+
+            <!-- Lista de capas en el grupo -->
+            <ul *ngFor="let layer of wmsLayers" style='list-style-type: none;  padding: 0; margin: 0;'>
+              <li *ngIf="layer.name=='catastroEspaña'"
+                style='list-style-type: none;  padding-left: 25px; margin: 0; padding-top: 5px;'>
+                <input type="checkbox" [checked]="isLayerVisible(layer)" (change)="toggleLayerVisibility(layer)"
+                  style="margin-right: 10px; width: 14px; height: 16px;">
+                {{ layer.label }}
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div class="main-div" *ngSwitchCase="'basemaps'">
+      <div class="header">
+        <div class="title-div">
+          <span class="title"><mat-icon class="icon_ind2">map</mat-icon>Mapas Base
+            <div class="close-button">
+              <button matTooltip="Cerrar" matTooltipPosition="left" mat-icon-button (click)="closePanel()">
+                <mat-icon class="icon">close</mat-icon>
+              </button>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="content" id="basemaps">
+        <ul id="basemap">
+          <ng-container *ngFor="let baseMap of baseMaps">
+            <li *ngIf="baseMap.name !== 'ESRISatelliteBoundaries'">
+              <input type="radio" name="baseMap" [id]="baseMap.name" [value]="baseMap.name"
+                (change)="changeBaseMap(baseMap)" [checked]="baseMap.active">
+              <label [for]="baseMap.name">{{ baseMap.label }}</label>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+    <div class="main-div" *ngSwitchCase="'filters'">
+      <div class="header">
+        <div class="title-div">
+          <span class="title"><mat-icon class="icon_ind2">storage</mat-icon>Filtros
+            <div class="close-button">
+              <button matTooltip="Cerrar" matTooltipPosition="left" mat-icon-button (click)="closePanel()">
+                <mat-icon class="icon">close</mat-icon>
+              </button>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="content" id="filters">
+        <p class="filter-title"> Filtros Países Iberoamérica </p>
+        <p class="filtro-ind">
+          <mat-slide-toggle [(ngModel)]="filterAppat" (change)="toggleFilter('appat', $event)"> &nbsp;Miembros APPAT
+            &nbsp;
+          </mat-slide-toggle>
+          <mat-icon matTooltip="Asociación Panamericana de Profesionales de la Agrimensura y Topografía"
+            matTooltipPosition="right">info</mat-icon>
+        </p>
+        <p class="filtro-ind">
+          <mat-slide-toggle [(ngModel)]="filterCpci" (change)="toggleFilter('cpci', $event)"> &nbsp;Miembros CPCI &nbsp;
+          </mat-slide-toggle>
+          <mat-icon matTooltip="Comité Permanente del Catastro en Iberoamérica"
+            matTooltipPosition="right">info</mat-icon>
+        </p>
+      </div>
+    </div>
+    <!--div class="main-div" *ngSwitchCase="'info'">
+      <div class="header">
+        <div class="title-div">
+          <span class="title"><mat-icon class="icon_ind2">info</mat-icon>Información
+            <div class="close-button">
+              <button matTooltip="Cerrar" matTooltipPosition="left" mat-icon-button (click)="closePanel()">
+                <mat-icon class="icon">close</mat-icon>
+              </button>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="content" id="info">
+        <p>Contenido para Info</p>
+      </div>
+    </div-->
+  </ng-container>
+</div>

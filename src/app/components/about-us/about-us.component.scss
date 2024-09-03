@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content styles */
+.main-content {
+    padding: 40px 0 0 0;
+    flex: 1;
+    background-color: rgb(240, 240, 240);
+}
+
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* About Us styles */
+.about-us {
+    margin-bottom: 40px;
+}
+
+.team-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.team-member2 {
+    border-left: 5px solid var(--secondary-color);
+    background-color: white;
+    border-radius: 5px;
+    padding: 50px 25px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    flex: 1 1 30%;
+    margin: 10px;
+
+    & .member-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 25px;
+        border: 2px solid var(--primary-color);
+    }
+
+    & h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+    }
+
+    & p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    & .linkedin-icon {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+    }
+
+    & .member-name2 {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+    }
+}
+
+.team-member {
+    border-left: 5px solid var(--secondary-color);
+    background-color: white;
+    border-radius: 5px;
+    padding: 50px 25px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    flex: 1 1 30%;
+    margin: 10px;
+
+    & .member-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 25px;
+        border: 2px solid var(--primary-color);
+    }
+
+    & h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+    }
+
+    & p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    & .linkedin-icon {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+    }
+
+    & .member-name {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+}
+
